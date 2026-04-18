@@ -101,7 +101,7 @@ HF_KEYS_FROM_ROW: tuple[str, ...] = tuple(
 
 
 DATASET_BASE_YEAR = 2017
-DATASET_BASE_MONTH = 1  # earliest resale transaction in transform_resale_flat_price
+DATASET_BASE_MONTH = 1  # earliest resale transaction in t
 
 
 def month_index_from_ym(year: int, month: int) -> int:
@@ -201,12 +201,12 @@ search_onemap = _load_search_onemap()
         database=MYSQL_DB,
     )
     try:
-        return pd.read_sql("SELECT * FROM transform_resale_flat_price", con=conn)
+        return pd.read_sql("SELECT * FROM t", con=conn)
     finally:
         conn.close()"""
 
 def load_data():
-    return pd.read_csv("data/transform_resale_flat_price.csv")
+    return pd.read_csv("data/t_compressed.csv")
 
 
 def normalize_dataframe_columns(df: pd.DataFrame) -> pd.DataFrame:
