@@ -28,6 +28,7 @@ st.title("HDB Resale Price Prediction Dashboard")
 SG_CENTER = dict(lat=1.3521, lon=103.8198)
 SG_BOUNDS = dict(west=103.6, east=104.1, south=1.15, north=1.48)
 
+"""
 # Data layer (no widget): loads rows for the dashboard; cached to speed reloads
 @st.cache_data(ttl=60)
 def load_data():
@@ -57,6 +58,11 @@ except mysql.connector.Error as e:
 except Exception as e:
     st.error(f"Failed to load data: {e}")
     st.stop()
+"""
+
+@st.cache_data(ttl=60)
+def load_data():
+    return pd.read_csv("data/transform_resale_flat_price.csv")
 
 df = _normalize_columns(df)
 
