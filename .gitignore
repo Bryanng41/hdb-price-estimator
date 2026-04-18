@@ -29,4 +29,4 @@ mlruns/
 # Optional local tooling
 .pytest_cache/
 .mypy_cache/
-*.egg-info/
+*.egg-info/data/transform_resale_flat_price.csv
