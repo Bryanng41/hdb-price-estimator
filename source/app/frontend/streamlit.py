@@ -27,7 +27,7 @@ SG_BOUNDS = dict(west=103.6, east=104.1, south=1.15, north=1.48)
 
 @st.cache_data(ttl=60)
 def load_data():
-    return pd.read_csv("data/transform_resale_flat_price.csv")
+    return pd.read_csv("data/transform_resale_flat_price_compressed.csv")
 
 def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     out = df.copy()
