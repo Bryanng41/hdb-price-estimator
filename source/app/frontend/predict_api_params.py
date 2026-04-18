@@ -15,21 +15,21 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-import mysql.connector
+#import mysql.connector
 import numpy as np
 import pandas as pd
 import pyproj
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 # override=True: repo `.env` wins over a stale `export PREDICT_API_URL=http://localhost:7860/predict` in the shell.
-load_dotenv(_REPO_ROOT / ".env", override=True)
+#load_dotenv(_REPO_ROOT / ".env", override=True)
 
 # MySQL for map / OneMap matching (same as README: MYSQL_* in project `.env`)
-MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
+"""MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
 MYSQL_USER = os.getenv("MYSQL_USER", "bt4301")
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "password")
-MYSQL_DB = os.getenv("MYSQL_DATABASE", "HDB_Data")
+MYSQL_DB = os.getenv("MYSQL_DATABASE", "HDB_Data")"""
 
 R_EARTH_M = 6_371_000.0
 
@@ -193,7 +193,7 @@ def _load_search_onemap():
 search_onemap = _load_search_onemap()
 
 
-def load_data() -> pd.DataFrame:
+"""def load_data() -> pd.DataFrame:
     conn = mysql.connector.connect(
         host=MYSQL_HOST,
         user=MYSQL_USER,
@@ -203,7 +203,10 @@ def load_data() -> pd.DataFrame:
     try:
         return pd.read_sql("SELECT * FROM transform_resale_flat_price", con=conn)
     finally:
-        conn.close()
+        conn.close()"""
+
+def load_data():
+    return pd.read_csv("data/transform_resale_flat_price.csv")
 
 
 def normalize_dataframe_columns(df: pd.DataFrame) -> pd.DataFrame:

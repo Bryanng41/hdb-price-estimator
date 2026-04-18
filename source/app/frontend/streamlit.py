@@ -64,6 +64,12 @@ except Exception as e:
 def load_data():
     return pd.read_csv("data/transform_resale_flat_price.csv")
 
+def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
+    out = df.copy()
+    out.columns = out.columns.str.lower()
+    return out
+
+df = load_data()
 df = _normalize_columns(df)
 
 # Schema guard — main area: red callout if required columns missing for map
