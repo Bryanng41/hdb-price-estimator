@@ -7,10 +7,6 @@ import requests
 
 from predict_api_params import (
     FLAT_MODEL_OPTIONS,
-    MYSQL_DB,
-    MYSQL_HOST,
-    MYSQL_PASSWORD,
-    MYSQL_USER,
     PREDICT_API_URL,
     STOREY_RANGE_OPTIONS,
     build_hdb_predict_payload,
@@ -28,37 +24,6 @@ st.title("HDB Resale Price Prediction Dashboard")
 SG_CENTER = dict(lat=1.3521, lon=103.8198)
 SG_BOUNDS = dict(west=103.6, east=104.1, south=1.15, north=1.48)
 
-"""
-# Data layer (no widget): loads rows for the dashboard; cached to speed reloads
-@st.cache_data(ttl=60)
-def load_data():
-    conn = mysql.connector.connect(
-        host=MYSQL_HOST,
-        user=MYSQL_USER,
-        password=MYSQL_PASSWORD,
-        database=MYSQL_DB,
-    )
-    try:
-        return pd.read_sql("SELECT * FROM transform_resale_flat_price", con=conn)
-    finally:
-        conn.close()
-
-
-def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
-    out = df.copy()
-    out.columns = out.columns.str.lower()
-    return out
-
-# Error states — main area: red callout if MySQL or load fails; stops the app
-try:
-    df = load_data()
-except mysql.connector.Error as e:
-    st.error(f"MySQL error: {e}")
-    st.stop()
-except Exception as e:
-    st.error(f"Failed to load data: {e}")
-    st.stop()
-"""
 
 @st.cache_data(ttl=60)
 def load_data():
@@ -95,7 +60,7 @@ if map_df.empty:
     st.stop()
 
 # Status banner — main area: green success line under the title
-st.success(f"{len(df):,} rows loaded from `{MYSQL_DB}.transform_resale_flat_price`")
+# st.success(f"{len(df):,} rows loaded from `{MYSQL_DB}.transform_resale_flat_price`")
 
 periods = sorted(map_df["month_and_year"].dropna().unique())
 if not periods:
